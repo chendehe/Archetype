@@ -11,6 +11,7 @@ import com.company.util.IdGenerator;
 import com.company.vo.Page;
 import com.company.vo.PageResult;
 import com.company.vo.UserVo;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -132,7 +133,7 @@ public class UserServiceImpl implements UserService {
 
     convertVoToEntity(vo, user);
 
-    user.setCreateTime(new Date());
+    user.setCreateTime(LocalDateTime.now());
     return user;
   }
 
@@ -147,7 +148,7 @@ public class UserServiceImpl implements UserService {
 
     convertVoToEntity(vo, user);
 
-    user.setUpdateTime(new Date());
+    user.setUpdateTime(LocalDateTime.now());
     return user;
   }
 

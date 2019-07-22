@@ -2,6 +2,7 @@ package com.company.po;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +17,7 @@ public class UserPo implements BasePo<UserPo>, Serializable {
   private int gender;
   private LocalDate birthday;
   private String address;
-  private Date createTime;
-  private Date updateTime;
+  private LocalDateTime createTime;
+  private LocalDateTime updateTime;
 
 }
