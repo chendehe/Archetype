@@ -1,7 +1,7 @@
-package com.company.controller;
+package com.company.filter;
 
 import com.company.exception.BaseException;
-import com.company.exception.ErrorCode;
+import com.company.common.ErrorCode;
 import com.company.exception.ErrorMessage;
 import com.company.exception.ErrorResult;
 import org.springframework.http.HttpStatus;

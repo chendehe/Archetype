@@ -1,4 +1,4 @@
-package com.company.config;
+package com.company.filter;
 
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;

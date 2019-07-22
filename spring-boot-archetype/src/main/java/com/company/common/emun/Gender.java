@@ -1,4 +1,4 @@
-package com.company.common;
+package com.company.common.emun;
 
 import java.util.HashMap;
 import java.util.Map;

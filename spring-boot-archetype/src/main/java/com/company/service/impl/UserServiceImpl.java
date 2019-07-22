@@ -1,8 +1,8 @@
 package com.company.service.impl;
 
-import com.company.common.Gender;
+import com.company.common.emun.Gender;
 import com.company.dao.UserDao;
-import com.company.exception.ErrorCode;
+import com.company.common.ErrorCode;
 import com.company.exception.ValidationException;
 import com.company.po.UserPo;
 import com.company.service.UserService;
