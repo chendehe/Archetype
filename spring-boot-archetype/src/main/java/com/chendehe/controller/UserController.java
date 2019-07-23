@@ -4,8 +4,8 @@ import com.chendehe.service.UserService;
 import com.chendehe.util.ResultUtil;
 import com.chendehe.vo.Page;
 import com.chendehe.vo.UserVo;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,7 +57,7 @@ public class UserController {
    */
   @PostMapping("/")
   ResponseEntity save(@RequestBody UserVo userVo) {
-    LOGGER.info("[UserController] user is:{}", new Gson().toJson(userVo));
+    LOGGER.info("[UserController] user is:{}", userVo);
     return ResultUtil.success(service.save(userVo), HttpStatus.CREATED);
   }
 
@@ -66,7 +66,7 @@ public class UserController {
    */
   @PutMapping("/{id}")
   ResponseEntity update(@RequestBody UserVo userVo, @PathVariable String id) {
-    LOGGER.info("[UserController] user is:{}, id is:{}", new Gson().toJson(userVo), id);
+    LOGGER.info("[UserController] user is:{}, id is:{}", userVo, id);
     userVo.setId(id);
     return ResultUtil.success(service.update(userVo), HttpStatus.CREATED);
   }
@@ -96,9 +96,9 @@ public class UserController {
       }
     }
 
-    JsonObject json = new JsonObject();
-    json.addProperty("status", "success");
-    return ResultUtil.success(json.toString(), HttpStatus.CREATED);
+    ObjectNode node = new ObjectMapper().createObjectNode();
+    node.put("status", "success");
+    return ResultUtil.success(node.toString(), HttpStatus.CREATED);
 
   }
 
@@ -113,9 +113,9 @@ public class UserController {
   public ResponseEntity downLoad(@RequestParam String id, @RequestParam String path) {
     LOGGER.info("[UserController] id:{},{}", id, path);
     service.downLoad(id, path);
-    JsonObject json = new JsonObject();
-    json.addProperty("status", "success");
-    return ResultUtil.success(json.toString(), HttpStatus.NO_CONTENT);
+    ObjectNode node = new ObjectMapper().createObjectNode();
+    node.put("status", "success");
+    return ResultUtil.success(node.toString(), HttpStatus.NO_CONTENT);
   }
 
 }
