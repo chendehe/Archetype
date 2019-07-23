@@ -9,11 +9,11 @@
     <version>2.1.6.RELEASE</version>
   </parent>
 
-  <groupId>com.company</groupId>
-  <artifactId>spring-boot</artifactId>
+  <groupId>com.chendehe</groupId>
+  <artifactId>cdh-archetype</artifactId>
   <version>0.1</version>
 
-  <name>spring-boot-archetype</name>
+  <name>CDH-ARCHETYPE</name>
 
   <properties>
     <java.version>1.8</java.version>
