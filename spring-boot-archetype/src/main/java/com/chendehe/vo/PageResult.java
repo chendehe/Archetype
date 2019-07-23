@@ -3,9 +3,11 @@ package com.chendehe.vo;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class PageResult<T> extends Page {
 
   // 总数
