@@ -1,4 +1,11 @@
 spring:
+  messages:
+    basename: i18n/messages
+#    fallback-to-system-locale: false
+#    always-use-message-format: true
+#    cache-duration:
+#    encoding: UTF-8
+#    use-code-as-default-message: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/test?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8
