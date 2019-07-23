@@ -10,10 +10,10 @@
   </parent>
 
   <groupId>com.chendehe</groupId>
-  <artifactId>cdh-archetype</artifactId>
+  <artifactId>cdh</artifactId>
   <version>0.1</version>
 
-  <name>CDH-ARCHETYPE</name>
+  <name>cdh</name>
 
   <properties>
     <java.version>1.8</java.version>
