@@ -6,7 +6,6 @@ import com.chendehe.vo.Page;
 import com.chendehe.vo.UserVo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,13 +87,7 @@ public class UserController {
   ResponseEntity upLoad(@RequestParam("file") MultipartFile file) {
     LOGGER.info("[UserController] file path:{}", file.isEmpty());
 
-    if (!file.isEmpty()) {
-      try {
-        service.upload(file);
-      } catch (IOException e) {
-        return ResultUtil.exception(e, HttpStatus.INTERNAL_SERVER_ERROR);
-      }
-    }
+    service.upload(file);
 
     ObjectNode node = new ObjectMapper().createObjectNode();
     node.put("status", "success");

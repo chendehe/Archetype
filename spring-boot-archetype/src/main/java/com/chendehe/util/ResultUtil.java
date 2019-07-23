@@ -1,9 +1,5 @@
 package com.chendehe.util;
 
-import com.chendehe.exception.BaseException;
-import com.chendehe.common.ErrorCode;
-import com.chendehe.exception.ErrorMessage;
-import com.chendehe.exception.ErrorResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -34,21 +30,6 @@ public final class ResultUtil {
    */
   public static <T> ResponseEntity success(T t, HttpStatus status) {
     return new ResponseEntity<>(t, status);
-  }
-
-  /**
-   * 异常返回.
-   *
-   * @param e BaseException
-   */
-  public static ResponseEntity exception(Exception e, HttpStatus status) {
-    LOGGER.error("[Exception]: ", e);
-    if (e instanceof BaseException) {
-      return new ResponseEntity<>(new ErrorResult(e.getMessage(), e.getLocalizedMessage()), status);
-    } else {
-      return new ResponseEntity<>(
-          new ErrorResult(ErrorMessage.message(ErrorCode.SYSTEM_ERROR), e.getMessage()), status);
-    }
   }
 
 }
