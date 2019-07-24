@@ -11,7 +11,8 @@
 
     <property name="LOG_HOME_PATH" value="logs"/>
     <property name="DEBUG_LOG_FILE" value="${LOG_HOME_PATH}/${APP_NAME}"/>
-    <property name="FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}" />
+    <property name="FILE_LOG_PATTERN"
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
 
     <!--appender 名称为 DEBUG_FILE-->
     <appender name="DEBUG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -22,7 +23,7 @@
 
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!--日志按天输出-->
-            <FileNamePattern>${DEBUG_LOG_FILE}.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <FileNamePattern>${DEBUG_LOG_FILE}.%d{yyyy-MM-dd}.%i.log.zip</FileNamePattern>
             <!--文件最大大小-->
             <MaxFileSize>100MB</MaxFileSize>
             <!--日志保留天数-->
