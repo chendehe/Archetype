@@ -1,5 +1,8 @@
 package com.chendehe.common;
 
+/**
+ * 国际化常量编码类.
+ */
 public final class ConstantCode {
 
   private ConstantCode() {

@@ -9,7 +9,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,7 +28,6 @@ public class UserController {
 
   private UserService service;
 
-  @Autowired
   public UserController(UserService service) {
     this.service = service;
   }
@@ -38,7 +36,7 @@ public class UserController {
    * 查找列表. 成功返回200.
    */
   @GetMapping("/list")
-  ResponseEntity findAll(@Valid Page page) {
+  public ResponseEntity findAll(@Valid Page page) {
     LOGGER.info("[UserController] id is:{}", page);
     return ResultUtil.success(service.findAll(page), HttpStatus.OK);
   }
@@ -47,7 +45,7 @@ public class UserController {
    * 查找详情. 成功返回200.
    */
   @GetMapping("/{id}")
-  ResponseEntity findOne(@PathVariable String id) {
+  public ResponseEntity findOne(@PathVariable String id) {
     LOGGER.info("[UserController] id is:{}", id);
     return ResultUtil.success(service.findOne(id), HttpStatus.OK);
   }
@@ -56,7 +54,7 @@ public class UserController {
    * 新建. 成功返回201.
    */
   @PostMapping("/")
-  ResponseEntity save(@RequestBody @Valid UserVo userVo) {
+  public ResponseEntity save(@RequestBody @Valid UserVo userVo) {
     LOGGER.info("[UserController] user is:{}", userVo);
     return ResultUtil.success(service.save(userVo), HttpStatus.CREATED);
   }
@@ -65,7 +63,7 @@ public class UserController {
    * 更新. 成功返回201.
    */
   @PutMapping("/{id}")
-  ResponseEntity update(@RequestBody @Valid UserVo userVo, @PathVariable String id) {
+  public ResponseEntity update(@RequestBody @Valid UserVo userVo, @PathVariable String id) {
     LOGGER.info("[UserController] user is:{}, id is:{}", userVo, id);
     userVo.setId(id);
     return ResultUtil.success(service.update(userVo), HttpStatus.CREATED);
@@ -75,7 +73,7 @@ public class UserController {
    * 删除. 成功返回204.
    */
   @DeleteMapping("/{id}")
-  ResponseEntity delete(@PathVariable String id) {
+  public ResponseEntity delete(@PathVariable String id) {
     LOGGER.info("[UserController] id is:{}", id);
     service.delete(id);
     return ResultUtil.success(HttpStatus.NO_CONTENT);
@@ -85,7 +83,7 @@ public class UserController {
    * Excel上传. 成功返回201.
    */
   @PostMapping("/upLoad")
-  ResponseEntity upLoad(@RequestParam("file") MultipartFile file) {
+  public ResponseEntity upLoad(@RequestParam("file") MultipartFile file) {
     LOGGER.info("[UserController] file path:{}", file.isEmpty());
 
     service.upload(file);

@@ -19,21 +19,21 @@ public interface UserDao extends BaseDao<UserDao> {
   @Select("select * from t_user where id = #{id}")
   Optional<UserPo> findOne(String id);
 
-  @Insert("insert into t_user(id, name, gender, birthday, address, create_time, update_time) " +
-      "values(#{id}, #{name}, #{gender}, #{birthday}, #{address}, #{createTime}, #{updateTime})")
+  @Insert("insert into t_user(id, name, gender, birthday, address, create_time, update_time) "
+      + "values(#{id}, #{name}, #{gender}, #{birthday}, #{address}, #{createTime}, #{updateTime})")
   void save(UserPo user);
 
-  @Insert("<script> " +
-      "insert into t_user(id, name, gender, birthday, address, create_time, update_time) " +
-      "values " +
-      "<foreach collection=\"items\" index=\"index\" item=\"item\" separator=\",\"> " +
-      "(#{id}, #{name}, #{gender}, #{birthday}, #{address}, #{createTime}, #{updateTime})" +
-      "</foreach> " +
-      "</script>")
+  @Insert("<script> "
+      + "insert into t_user(id, name, gender, birthday, address, create_time, update_time) "
+      + "values "
+      + "<foreach collection=\"items\" index=\"index\" item=\"item\" separator=\",\"> "
+      + "(#{id}, #{name}, #{gender}, #{birthday}, #{address}, #{createTime}, #{updateTime})"
+      + "</foreach> "
+      + "</script>")
   void saveBatch(List<UserPo> user);
 
-  @Update("update t_user set name = #{name}, gender = #{gender}, birthday = #{birthday}, " +
-      "address = #{address}, update_time = #{updateTime} where id = #{id}")
+  @Update("update t_user set name = #{name}, gender = #{gender}, birthday = #{birthday}, "
+      + "address = #{address}, update_time = #{updateTime} where id = #{id}")
   void update(UserPo user);
 
   @Delete("delete from t_user where id = #{id}")

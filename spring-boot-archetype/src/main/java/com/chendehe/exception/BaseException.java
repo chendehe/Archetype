@@ -1,6 +1,11 @@
 package com.chendehe.exception;
 
+import lombok.Getter;
 
+/**
+ * 业务基础异常类.
+ */
+@Getter
 public class BaseException extends RuntimeException {
 
   private String errorCode;
@@ -19,11 +24,4 @@ public class BaseException extends RuntimeException {
     this.param = param;
   }
 
-  String getErrorCode() {
-    return errorCode;
-  }
-
-  String[] getParam() {
-    return param;
-  }
 }

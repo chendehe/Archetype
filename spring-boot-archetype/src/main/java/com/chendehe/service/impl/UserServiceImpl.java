@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,7 +23,6 @@ public class UserServiceImpl implements UserService {
 
   private UserDao userDao;
 
-  @Autowired
   public UserServiceImpl(UserDao userDao) {
     this.userDao = userDao;
   }

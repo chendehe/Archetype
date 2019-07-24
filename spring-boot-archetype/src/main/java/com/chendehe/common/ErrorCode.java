@@ -1,13 +1,14 @@
 package com.chendehe.common;
 
+/**
+ * 国际化错误码类.
+ */
 public final class ErrorCode {
 
   private ErrorCode() {
   }
 
   public static final String SYSTEM_ERROR = "system.error";
-  public static final String PARAM_EMPTY = "param.empty";
-  public static final String PARAM_TYPE_ERROR = "param.type.empty";
   public static final String VALID_MIN = "{valid.min}";
   public static final String VALID_MAX = "{valid.max}";
   public static final String VALID_NULL = "{valid.null}";

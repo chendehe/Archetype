@@ -5,6 +5,9 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
 
+/**
+ * 获取异常国际化.
+ */
 @Component
 public final class ErrorMessage {
 

@@ -1,5 +1,10 @@
 package com.chendehe.exception;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class ErrorResult {
 
   private String errorMessage;
@@ -10,19 +15,4 @@ public class ErrorResult {
     this.errorDetail = errorDetail;
   }
 
-  public String getErrorMessage() {
-    return errorMessage;
-  }
-
-  public void setErrorMessage(String errorMessage) {
-    this.errorMessage = errorMessage;
-  }
-
-  public String getErrorDetail() {
-    return errorDetail;
-  }
-
-  public void setErrorDetail(String errorDetail) {
-    this.errorDetail = errorDetail;
-  }
 }

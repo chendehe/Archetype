@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * Springboot启动类
+ * Springboot启动类.
  */
 @SpringBootApplication
 @ServletComponentScan
