@@ -1,4 +1,4 @@
-package com.chendehe.config;
+package com.chendehe.common.prop;
 
 import lombok.Getter;
 import lombok.Setter;

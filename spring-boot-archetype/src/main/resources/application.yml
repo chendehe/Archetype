@@ -2,7 +2,7 @@ spring:
   application:
     name: spring-boot-archetype
   messages:
-    basename: i18n/messages
+    basename: i18n/messages/messages,i18n/constants/constants
     encoding: UTF-8
     fallback-to-system-locale: false
   datasource:

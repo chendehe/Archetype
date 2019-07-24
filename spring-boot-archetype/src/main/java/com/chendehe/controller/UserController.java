@@ -6,6 +6,7 @@ import com.chendehe.vo.Page;
 import com.chendehe.vo.UserVo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class UserController {
    * 查找列表. 成功返回200.
    */
   @GetMapping("/list")
-  ResponseEntity findAll(Page page) {
+  ResponseEntity findAll(@Valid Page page) {
     LOGGER.info("[UserController] id is:{}", page);
     return ResultUtil.success(service.findAll(page), HttpStatus.OK);
   }
