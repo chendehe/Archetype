@@ -56,7 +56,7 @@ public class UserController {
    * 新建. 成功返回201.
    */
   @PostMapping("/")
-  ResponseEntity save(@RequestBody UserVo userVo) {
+  ResponseEntity save(@RequestBody @Valid UserVo userVo) {
     LOGGER.info("[UserController] user is:{}", userVo);
     return ResultUtil.success(service.save(userVo), HttpStatus.CREATED);
   }
@@ -65,7 +65,7 @@ public class UserController {
    * 更新. 成功返回201.
    */
   @PutMapping("/{id}")
-  ResponseEntity update(@RequestBody UserVo userVo, @PathVariable String id) {
+  ResponseEntity update(@RequestBody @Valid UserVo userVo, @PathVariable String id) {
     LOGGER.info("[UserController] user is:{}, id is:{}", userVo, id);
     userVo.setId(id);
     return ResultUtil.success(service.update(userVo), HttpStatus.CREATED);

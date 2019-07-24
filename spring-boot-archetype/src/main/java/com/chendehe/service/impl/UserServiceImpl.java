@@ -1,12 +1,9 @@
 package com.chendehe.service.impl;
 
-import com.chendehe.common.emun.Gender;
 import com.chendehe.dao.UserDao;
-import com.chendehe.common.ErrorCode;
 import com.chendehe.exception.ValidationException;
 import com.chendehe.po.UserPo;
 import com.chendehe.service.UserService;
-import com.chendehe.util.DataCheck;
 import com.chendehe.util.IdGenerator;
 import com.chendehe.vo.Page;
 import com.chendehe.vo.PageResult;
@@ -51,7 +48,6 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public UserVo findOne(String id) {
-    DataCheck.checkTrimStrEmpty(id, ErrorCode.PARAM_EMPTY, "id");
     return convertEntityToVo(userDao.findOne(id)
         .orElseThrow(() -> new ValidationException("object.not.exist", id)));
   }
@@ -59,8 +55,6 @@ public class UserServiceImpl implements UserService {
   @Override
   public UserVo save(UserVo vo) {
     vo.setId(IdGenerator.get());
-
-    checkInputData(vo);
 
     UserPo entity = convertVoToEntitySave(vo);
     userDao.save(entity);
@@ -71,8 +65,6 @@ public class UserServiceImpl implements UserService {
   @Override
   public UserVo update(UserVo vo) {
 
-    checkInputData(vo);
-
     UserPo user = convertVoToEntityUpdate(vo);
 
     userDao.update(user);
@@ -81,7 +73,6 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public void delete(String id) {
-//    DataCheck.checkTrimStrEmpty(id, ErrorCode.PARAM_EMPTY, "id");
     userDao.delete(id);
   }
 
@@ -157,15 +148,6 @@ public class UserServiceImpl implements UserService {
     user.setGender(vo.getGender());
     user.setBirthday(vo.getBirthday());
     user.setAddress(vo.getAddress());
-  }
-
-  private void checkInputData(UserVo vo) {
-    DataCheck.checkTrimStrEmpty(vo.getAddress(), ErrorCode.PARAM_EMPTY, "address");
-    DataCheck.checkTrimStrEmpty(vo.getId(), ErrorCode.PARAM_EMPTY, "id");
-    DataCheck.checkTrimStrEmpty(vo.getName(), ErrorCode.PARAM_EMPTY, "name");
-    DataCheck.checkNull(vo.getBirthday(), ErrorCode.PARAM_EMPTY, "birthday");
-    DataCheck.checkNull(vo.getGender(), ErrorCode.PARAM_EMPTY, "gender");
-    DataCheck.checkEnum(Gender.class, vo.getGender(), ErrorCode.PARAM_TYPE_ERROR, "gender");
   }
 
 }

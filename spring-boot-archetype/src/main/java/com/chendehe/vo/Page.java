@@ -19,6 +19,7 @@ public class Page {
   private Integer currentPage;
 
   // 页面大小
+  @Min(value = 1, message = ConstantCode.PAGE_SIZE + ErrorCode.VALID_MIN)
   private Integer pageSize;
 
 }
