@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+    <!--用springProperty获取Spring的配置-->
+    <springProperty scope="context" name="APP_NAME" source="spring.application.name"/>
+    <!--应用名称-->
+    <contextName>${APP_NAME}</contextName>
+
+    <property name="LOG_HOME_PATH" value="logs"/>
+    <property name="DEBUG_LOG_FILE" value="${LOG_HOME_PATH}/${APP_NAME}"/>
+    <property name="FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}" />
+
+    <!--appender 名称为 DEBUG_FILE-->
+    <appender name="DEBUG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--日志格式化-->
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--日志按天输出-->
+            <FileNamePattern>${DEBUG_LOG_FILE}.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <!--文件最大大小-->
+            <MaxFileSize>100MB</MaxFileSize>
+            <!--日志保留天数-->
+            <MaxHistory>3</MaxHistory>
+        </rollingPolicy>
+
+        <!--过滤可以输出到日志的level-->
+        <!--只会输出DEBUG级别的日志到文件中-->
+        <!--<filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>-->
+    </appender>
+
+    <!--指定包或者类的日志级别-->
+    <!--<logger name="com.chendehe.dao" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="DEBUG_FILE"/>
+    </logger>-->
+
+    <!--Spring 的 profile 功能-->
+    <springProfile name="default">
+        <!--根日志级别,没有配置logger时继承它-->
+        <root level="INFO">
+            <!--输出控制台-->
+            <appender-ref ref="CONSOLE"/>
+            <!--输出文件-->
+            <appender-ref ref="DEBUG_FILE"/>
+        </root>
+    </springProfile>
+    <springProfile name="dev">
+        <root level="INFO">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+    <springProfile name="production">
+        <root level="INFO">
+            <appender-ref ref="DEBUG_FILE"/>
+        </root>
+    </springProfile>
+
+</configuration>
