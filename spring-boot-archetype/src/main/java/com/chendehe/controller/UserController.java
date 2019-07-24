@@ -33,6 +33,14 @@ public class UserController {
   }
 
   /**
+   * 测试.
+   */
+  @GetMapping("/hello")
+  public String hello() {
+    return "Hello World";
+  }
+
+  /**
    * 查找列表. 成功返回200.
    */
   @GetMapping("/list")
