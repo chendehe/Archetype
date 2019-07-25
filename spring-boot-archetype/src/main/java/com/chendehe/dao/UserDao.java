@@ -11,10 +11,12 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 @Mapper
-public interface UserDao extends BaseDao<UserDao> {
+public interface UserDao extends BaseDao {
 
   @Select("select * from t_user limit 0, 10")
   List<UserPO> findAll(Page page);
+
+  List<UserPO> find();
 
   @Select("select * from t_user where id = #{id}")
   Optional<UserPO> findOne(String id);
@@ -23,7 +25,7 @@ public interface UserDao extends BaseDao<UserDao> {
       + "values(#{id}, #{name}, #{gender}, #{birthday}, #{address}, #{createTime}, #{updateTime})")
   void save(UserPO user);
 
-  @Insert("<script> "
+  @Insert("<![CDATA[<]]>script<![CDATA[>]]> "
       + "insert into t_user(id, name, gender, birthday, address, create_time, update_time) "
       + "values "
       + "<foreach collection=\"items\" index=\"index\" item=\"item\" separator=\",\"> "
