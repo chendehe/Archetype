@@ -1,4 +1,4 @@
-package com.chendehe.util;
+package com.chendehe.utils;
 
 import com.chendehe.exception.ValidationException;
 import java.lang.reflect.InvocationTargetException;

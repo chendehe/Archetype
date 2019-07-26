@@ -8,7 +8,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class PageResult<T> extends Page {
+public final class PageResult<T> extends Page {
 
   // 总数
   private Integer totalNum;

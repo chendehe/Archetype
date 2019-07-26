@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * 拦截处理异常响应.
  */
 @ControllerAdvice("com.chendehe.controller")
-public class ExceptionAdvice {
+public final class ExceptionAdvice {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionAdvice.class);
 

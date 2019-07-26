@@ -1,7 +1,7 @@
 package com.chendehe.controller;
 
 import com.chendehe.service.UserService;
-import com.chendehe.util.ResultUtil;
+import com.chendehe.utils.ResultUtils;
 import com.chendehe.vo.Page;
 import com.chendehe.vo.UserVO;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,11 +24,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/users")
-public class UserController {
+public final class UserController {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
-  private UserService service;
+  private final UserService service;
 
   public UserController(UserService service) {
     this.service = service;
@@ -48,7 +48,7 @@ public class UserController {
   @GetMapping
   public ResponseEntity listUserByPage(@Valid Page page) {
     LOGGER.info("[UserController] id is:{}", page);
-    return ResultUtil.success(service.listUserByPage(page), HttpStatus.OK);
+    return ResultUtils.success(service.listUserByPage(page), HttpStatus.OK);
   }
 
   /**
@@ -57,7 +57,7 @@ public class UserController {
   @GetMapping("/{id}")
   public ResponseEntity getUserById(@PathVariable String id) {
     LOGGER.info("[UserController] id is:{}", id);
-    return ResultUtil.success(service.getUserById(id), HttpStatus.OK);
+    return ResultUtils.success(service.getUserById(id), HttpStatus.OK);
   }
 
   /**
@@ -66,7 +66,7 @@ public class UserController {
   @PostMapping
   public ResponseEntity save(@RequestBody @Valid UserVO userVo) {
     LOGGER.info("[UserController] user is:{}", userVo);
-    return ResultUtil.success(service.save(userVo), HttpStatus.CREATED);
+    return ResultUtils.success(service.save(userVo), HttpStatus.CREATED);
   }
 
   /**
@@ -76,7 +76,7 @@ public class UserController {
   public ResponseEntity update(@RequestBody @Valid UserVO userVo, @PathVariable String id) {
     LOGGER.info("[UserController] user is:{}, id is:{}", userVo, id);
     userVo.setId(id);
-    return ResultUtil.success(service.update(userVo), HttpStatus.CREATED);
+    return ResultUtils.success(service.update(userVo), HttpStatus.CREATED);
   }
 
   /**
@@ -86,7 +86,7 @@ public class UserController {
   public ResponseEntity remove(@PathVariable String id) {
     LOGGER.info("[UserController] id is:{}", id);
     service.remove(id);
-    return ResultUtil.success(HttpStatus.NO_CONTENT);
+    return ResultUtils.success(HttpStatus.NO_CONTENT);
   }
 
   /**
@@ -100,7 +100,7 @@ public class UserController {
 
     ObjectNode node = new ObjectMapper().createObjectNode();
     node.put("status", "success");
-    return ResultUtil.success(node.toString(), HttpStatus.CREATED);
+    return ResultUtils.success(node.toString(), HttpStatus.CREATED);
 
   }
 
@@ -117,7 +117,7 @@ public class UserController {
     service.downLoad(id, path);
     ObjectNode node = new ObjectMapper().createObjectNode();
     node.put("status", "success");
-    return ResultUtil.success(node.toString(), HttpStatus.NO_CONTENT);
+    return ResultUtils.success(node.toString(), HttpStatus.NO_CONTENT);
   }
 
 }

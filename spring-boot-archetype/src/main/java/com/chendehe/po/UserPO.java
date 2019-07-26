@@ -3,7 +3,7 @@ package com.chendehe.po;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class UserPO implements Serializable {
+public final class UserPO implements Serializable {
 
   private String id;
 

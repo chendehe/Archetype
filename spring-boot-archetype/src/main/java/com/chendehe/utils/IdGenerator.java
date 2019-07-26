@@ -1,4 +1,4 @@
-package com.chendehe.util;
+package com.chendehe.utils;
 
 import java.util.UUID;
 

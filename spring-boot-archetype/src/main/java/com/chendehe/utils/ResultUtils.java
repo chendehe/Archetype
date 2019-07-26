@@ -1,11 +1,11 @@
-package com.chendehe.util;
+package com.chendehe.utils;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-public final class ResultUtil {
+public final class ResultUtils {
 
-  private ResultUtil() {
+  private ResultUtils() {
   }
 
   /**

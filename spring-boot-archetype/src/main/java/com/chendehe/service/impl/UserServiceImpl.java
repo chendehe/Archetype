@@ -4,7 +4,7 @@ import com.chendehe.dao.UserDao;
 import com.chendehe.exception.ValidationException;
 import com.chendehe.po.UserPO;
 import com.chendehe.service.UserService;
-import com.chendehe.util.IdGenerator;
+import com.chendehe.utils.IdGenerator;
 import com.chendehe.vo.Page;
 import com.chendehe.vo.PageResult;
 import com.chendehe.vo.UserVO;

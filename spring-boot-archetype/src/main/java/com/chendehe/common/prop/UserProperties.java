@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 @ConfigurationProperties(prefix = "user")
 @PropertySource("classpath:user.properties")
-public class UserProperties {
+public final class UserProperties {
   private String username;
   private Integer age;
 }
