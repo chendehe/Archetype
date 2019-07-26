@@ -5,11 +5,11 @@ import com.chendehe.exception.ValidationException;
 import com.chendehe.po.UserPO;
 import com.chendehe.service.UserService;
 import com.chendehe.utils.IdGenerator;
+import com.chendehe.utils.TimeUtils;
 import com.chendehe.vo.Page;
 import com.chendehe.vo.PageResult;
 import com.chendehe.vo.UserVO;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
@@ -108,8 +108,7 @@ public class UserServiceImpl implements UserService {
     userVo.setId(user.getId());
     userVo.setName(user.getName());
     userVo.setGender(user.getGender());
-    String birthday = user.getBirthday().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-    userVo.setBirthday(birthday);
+    userVo.setBirthday(TimeUtils.parseString(user.getBirthday()));
     userVo.setAddress(user.getAddress());
     return userVo;
   }
@@ -148,8 +147,7 @@ public class UserServiceImpl implements UserService {
     user.setId(vo.getId());
     user.setName(vo.getName());
     user.setGender(vo.getGender());
-    LocalDateTime birthday = LocalDateTime.parse(vo.getBirthday(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-    user.setBirthday(birthday);
+    user.setBirthday(TimeUtils.parseLocalDateTime(vo.getBirthday()));
     user.setAddress(vo.getAddress());
   }
 
