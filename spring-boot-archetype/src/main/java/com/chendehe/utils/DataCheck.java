@@ -3,6 +3,7 @@ package com.chendehe.utils;
 import com.chendehe.exception.ValidationException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+import java.util.Optional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
@@ -43,9 +44,7 @@ public final class DataCheck {
    * @param code 错误编码
    */
   public static <T> void checkNull(T t, String code, String... param) {
-    if (null == t) {
-      throw new ValidationException(code, param);
-    }
+    Optional.ofNullable(t).orElseThrow(() -> new ValidationException(code, param));
   }
 
   /**

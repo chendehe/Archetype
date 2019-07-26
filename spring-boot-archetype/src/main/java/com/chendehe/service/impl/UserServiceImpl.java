@@ -10,8 +10,8 @@ import com.chendehe.vo.Page;
 import com.chendehe.vo.PageResult;
 import com.chendehe.vo.UserVO;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -34,12 +34,10 @@ public class UserServiceImpl implements UserService {
 
     PageResult<UserVO> result = new PageResult<>();
     List<UserPO> userList = userDao.listUserByPage(page);
-    List<UserVO> userVoList = new ArrayList<>();
 
-    for (UserPO user : userList) {
-      userVoList.add(convertEntityToVo(user));
-    }
-    result.setList(userVoList);
+    result.setList(userList.stream().map(
+        this::convertEntityToVo).collect(Collectors.toList())
+    );
     result.setTotalNum(userDao.count());
     result.setPageSize(page.getPageSize());
     result.setCurrentPage(page.getCurrentPage());
