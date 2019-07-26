@@ -16,8 +16,6 @@ public interface UserDao extends BaseDao {
   @Select("select * from t_user limit 0, 10")
   List<UserPO> findAll(Page page);
 
-  List<UserPO> find();
-
   @Select("select * from t_user where id = #{id}")
   Optional<UserPO> findOne(String id);
 

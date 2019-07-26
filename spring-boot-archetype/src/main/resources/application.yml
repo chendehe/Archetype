@@ -27,10 +27,6 @@ spring:
     max-open-prepared-statements: 20
     async-init: true
 
-# 使用基于配置文件的 MyBatis 时开启
-#mybatis:
-#  mapper-locations: mapper/*Dao.xml
-
 management:
   endpoint:
     health:
