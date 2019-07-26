@@ -3,7 +3,6 @@ package com.chendehe.vo;
 import com.chendehe.common.ConstantCode;
 import com.chendehe.common.ErrorCode;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.time.LocalDateTime;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Getter;
@@ -27,7 +26,7 @@ public class UserVO {
   @JsonProperty("sex")
   private Integer gender;
 
-  private LocalDateTime birthday;
+  private String birthday;
   private String address;
 
 

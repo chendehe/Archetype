@@ -29,8 +29,8 @@ public class RemoteServiceTest {
   public void exampleTest() {
     UserVO user = new UserVO();
     user.setId("123");
-    given(this.remoteService.findOne("123")).willReturn(user);
-    UserVO reverse = reverser.findOne("123");
+    given(this.remoteService.getUserById("123")).willReturn(user);
+    UserVO reverse = reverser.getUserById("123");
     assertThat(reverse.getId()).isEqualTo("123");
   }
 

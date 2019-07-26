@@ -14,11 +14,11 @@ import org.apache.ibatis.annotations.Update;
 @Mapper
 public interface UserDao extends BaseDao<UserDao> {
 
-  @Select("select * from t_user limit 0, 10")
-  List<UserPO> findAll(Page page);
+  @Select("select * from t_user limit #{page.currentPage}, #{page.pageSize}")
+  List<UserPO> listUserByPage(@Param("page") Page page);
 
   @Select("select * from t_user where id = #{id}")
-  Optional<UserPO> findOne(String id);
+  Optional<UserPO> getUserById(String id);
 
   @Insert("insert into t_user(id, name, gender, birthday, address, create_time, update_time) "
       + "values(#{id}, #{name}, #{gender}, #{birthday}, #{address}, #{createTime}, #{updateTime})")
@@ -38,8 +38,8 @@ public interface UserDao extends BaseDao<UserDao> {
   void update(UserPO user);
 
   @Delete("delete from t_user where id = #{id}")
-  void delete(String id);
+  void remove(String id);
 
   @Select("select count(*) from t_user")
-  int totalNum();
+  int count();
 }

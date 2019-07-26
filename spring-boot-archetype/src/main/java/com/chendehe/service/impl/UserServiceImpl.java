@@ -9,6 +9,7 @@ import com.chendehe.vo.Page;
 import com.chendehe.vo.PageResult;
 import com.chendehe.vo.UserVO;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
@@ -29,25 +30,25 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public PageResult<UserVO> findAll(Page page) {
+  public PageResult<UserVO> listUserByPage(Page page) {
 
     PageResult<UserVO> result = new PageResult<>();
-    List<UserPO> userList = userDao.findAll(page);
+    List<UserPO> userList = userDao.listUserByPage(page);
     List<UserVO> userVoList = new ArrayList<>();
 
     for (UserPO user : userList) {
       userVoList.add(convertEntityToVo(user));
     }
     result.setList(userVoList);
-    result.setTotalNum(userDao.totalNum());
+    result.setTotalNum(userDao.count());
     result.setPageSize(page.getPageSize());
     result.setCurrentPage(page.getCurrentPage());
     return result;
   }
 
   @Override
-  public UserVO findOne(String id) {
-    return convertEntityToVo(userDao.findOne(id)
+  public UserVO getUserById(String id) {
+    return convertEntityToVo(userDao.getUserById(id)
         .orElseThrow(() -> new ValidationException("object.not.exist", id)));
   }
 
@@ -72,8 +73,8 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public void delete(String id) {
-    userDao.delete(id);
+  public void remove(String id) {
+    userDao.remove(id);
   }
 
   @Override
@@ -107,7 +108,8 @@ public class UserServiceImpl implements UserService {
     userVo.setId(user.getId());
     userVo.setName(user.getName());
     userVo.setGender(user.getGender());
-    userVo.setBirthday(user.getBirthday());
+    String birthday = user.getBirthday().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    userVo.setBirthday(birthday);
     userVo.setAddress(user.getAddress());
     return userVo;
   }
@@ -146,7 +148,8 @@ public class UserServiceImpl implements UserService {
     user.setId(vo.getId());
     user.setName(vo.getName());
     user.setGender(vo.getGender());
-    user.setBirthday(vo.getBirthday());
+    LocalDateTime birthday = LocalDateTime.parse(vo.getBirthday(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    user.setBirthday(birthday);
     user.setAddress(vo.getAddress());
   }
 

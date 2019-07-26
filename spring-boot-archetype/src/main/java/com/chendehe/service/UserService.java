@@ -10,12 +10,12 @@ public interface UserService {
   /**
    * 查找列表.
    */
-  PageResult<UserVO> findAll(Page page);
+  PageResult<UserVO> listUserByPage(Page page);
 
   /**
    * 查找详情.
    */
-  UserVO findOne(String id);
+  UserVO getUserById(String id);
 
   /**
    * 新建.
@@ -30,7 +30,7 @@ public interface UserService {
   /**
    * 删除.
    */
-  void delete(String id);
+  void remove(String id);
 
   /**
    * 删除.

@@ -17,11 +17,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
+@RequestMapping("/users")
 public class UserController {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
@@ -43,25 +45,25 @@ public class UserController {
   /**
    * 查找列表. 成功返回200.
    */
-  @GetMapping("/list")
-  public ResponseEntity findAll(@Valid Page page) {
+  @GetMapping
+  public ResponseEntity listUserByPage(@Valid Page page) {
     LOGGER.info("[UserController] id is:{}", page);
-    return ResultUtil.success(service.findAll(page), HttpStatus.OK);
+    return ResultUtil.success(service.listUserByPage(page), HttpStatus.OK);
   }
 
   /**
    * 查找详情. 成功返回200.
    */
   @GetMapping("/{id}")
-  public ResponseEntity findOne(@PathVariable String id) {
+  public ResponseEntity getUserById(@PathVariable String id) {
     LOGGER.info("[UserController] id is:{}", id);
-    return ResultUtil.success(service.findOne(id), HttpStatus.OK);
+    return ResultUtil.success(service.getUserById(id), HttpStatus.OK);
   }
 
   /**
    * 新建. 成功返回201.
    */
-  @PostMapping("/")
+  @PostMapping
   public ResponseEntity save(@RequestBody @Valid UserVO userVo) {
     LOGGER.info("[UserController] user is:{}", userVo);
     return ResultUtil.success(service.save(userVo), HttpStatus.CREATED);
@@ -81,9 +83,9 @@ public class UserController {
    * 删除. 成功返回204.
    */
   @DeleteMapping("/{id}")
-  public ResponseEntity delete(@PathVariable String id) {
+  public ResponseEntity remove(@PathVariable String id) {
     LOGGER.info("[UserController] id is:{}", id);
-    service.delete(id);
+    service.remove(id);
     return ResultUtil.success(HttpStatus.NO_CONTENT);
   }
 

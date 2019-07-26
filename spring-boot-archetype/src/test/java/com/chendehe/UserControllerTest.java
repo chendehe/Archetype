@@ -22,7 +22,7 @@ public class UserControllerTest {
 
   @Test
   public void exampleTest() {
-    String body = this.restTemplate.getForObject("/hello", String.class);
+    String body = this.restTemplate.getForObject("/users/hello", String.class);
     assertThat(body).isEqualTo("Hello World");
   }
 
