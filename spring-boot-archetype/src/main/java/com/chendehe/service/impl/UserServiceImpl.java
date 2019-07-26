@@ -14,6 +14,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
@@ -50,6 +51,7 @@ public class UserServiceImpl implements UserService {
         .orElseThrow(() -> new ValidationException("object.not.exist", id)));
   }
 
+  @Transactional
   @Override
   public UserVO save(UserVO vo) {
     vo.setId(IdGenerator.get());
