@@ -7,11 +7,12 @@ import java.util.Optional;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 @Mapper
-public interface UserDao extends BaseDao {
+public interface UserDao extends BaseDao<UserDao> {
 
   @Select("select * from t_user limit 0, 10")
   List<UserPO> findAll(Page page);
@@ -23,14 +24,14 @@ public interface UserDao extends BaseDao {
       + "values(#{id}, #{name}, #{gender}, #{birthday}, #{address}, #{createTime}, #{updateTime})")
   void save(UserPO user);
 
-  @Insert("<![CDATA[<]]>script<![CDATA[>]]> "
+  @Insert("<script> "
       + "insert into t_user(id, name, gender, birthday, address, create_time, update_time) "
       + "values "
-      + "<foreach collection=\"items\" index=\"index\" item=\"item\" separator=\",\"> "
-      + "(#{id}, #{name}, #{gender}, #{birthday}, #{address}, #{createTime}, #{updateTime})"
+      + "<foreach collection=\"users\" index=\"index\" item=\"user\" separator=\",\"> "
+      + "(#{user.id}, #{user.name}, #{user.gender}, #{user.birthday}, #{user.address}, #{user.createTime}, #{user.updateTime})"
       + "</foreach> "
       + "</script>")
-  void saveBatch(List<UserPO> user);
+  void saveBatch(@Param("users") List<UserPO> users);
 
   @Update("update t_user set name = #{name}, gender = #{gender}, birthday = #{birthday}, "
       + "address = #{address}, update_time = #{updateTime} where id = #{id}")
