@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
 import com.chendehe.service.UserService;
-import com.chendehe.vo.UserVo;
+import com.chendehe.vo.UserVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +27,10 @@ public class RemoteServiceTest {
 
   @Test
   public void exampleTest() {
-    UserVo user = new UserVo();
+    UserVO user = new UserVO();
     user.setId("123");
     given(this.remoteService.findOne("123")).willReturn(user);
-    UserVo reverse = reverser.findOne("123");
+    UserVO reverse = reverser.findOne("123");
     assertThat(reverse.getId()).isEqualTo("123");
   }
 

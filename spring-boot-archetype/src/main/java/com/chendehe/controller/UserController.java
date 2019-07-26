@@ -3,7 +3,7 @@ package com.chendehe.controller;
 import com.chendehe.service.UserService;
 import com.chendehe.util.ResultUtil;
 import com.chendehe.vo.Page;
-import com.chendehe.vo.UserVo;
+import com.chendehe.vo.UserVO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import javax.validation.Valid;
@@ -62,7 +62,7 @@ public class UserController {
    * 新建. 成功返回201.
    */
   @PostMapping("/")
-  public ResponseEntity save(@RequestBody @Valid UserVo userVo) {
+  public ResponseEntity save(@RequestBody @Valid UserVO userVo) {
     LOGGER.info("[UserController] user is:{}", userVo);
     return ResultUtil.success(service.save(userVo), HttpStatus.CREATED);
   }
@@ -71,7 +71,7 @@ public class UserController {
    * 更新. 成功返回201.
    */
   @PutMapping("/{id}")
-  public ResponseEntity update(@RequestBody @Valid UserVo userVo, @PathVariable String id) {
+  public ResponseEntity update(@RequestBody @Valid UserVO userVo, @PathVariable String id) {
     LOGGER.info("[UserController] user is:{}, id is:{}", userVo, id);
     userVo.setId(id);
     return ResultUtil.success(service.update(userVo), HttpStatus.CREATED);

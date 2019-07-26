@@ -7,7 +7,7 @@ import com.chendehe.service.UserService;
 import com.chendehe.util.IdGenerator;
 import com.chendehe.vo.Page;
 import com.chendehe.vo.PageResult;
-import com.chendehe.vo.UserVo;
+import com.chendehe.vo.UserVO;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +28,11 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public PageResult<UserVo> findAll(Page page) {
+  public PageResult<UserVO> findAll(Page page) {
 
-    PageResult<UserVo> result = new PageResult<>();
+    PageResult<UserVO> result = new PageResult<>();
     List<UserPO> userList = userDao.findAll(page);
-    List<UserVo> userVoList = new ArrayList<>();
+    List<UserVO> userVoList = new ArrayList<>();
 
     for (UserPO user : userList) {
       userVoList.add(convertEntityToVo(user));
@@ -45,13 +45,13 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public UserVo findOne(String id) {
+  public UserVO findOne(String id) {
     return convertEntityToVo(userDao.findOne(id)
         .orElseThrow(() -> new ValidationException("object.not.exist", id)));
   }
 
   @Override
-  public UserVo save(UserVo vo) {
+  public UserVO save(UserVO vo) {
     vo.setId(IdGenerator.get());
 
     UserPO entity = convertVoToEntitySave(vo);
@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public UserVo update(UserVo vo) {
+  public UserVO update(UserVO vo) {
 
     UserPO user = convertVoToEntityUpdate(vo);
 
@@ -100,8 +100,8 @@ public class UserServiceImpl implements UserService {
    * @param user entity
    * @return vo
    */
-  private UserVo convertEntityToVo(UserPO user) {
-    UserVo userVo = new UserVo();
+  private UserVO convertEntityToVo(UserPO user) {
+    UserVO userVo = new UserVO();
     userVo.setId(user.getId());
     userVo.setName(user.getName());
     userVo.setGender(user.getGender());
@@ -113,10 +113,10 @@ public class UserServiceImpl implements UserService {
   /**
    * vo 转为 entity.
    *
-   * @param vo UserVo
+   * @param vo UserVO
    * @return UserPO
    */
-  private UserPO convertVoToEntitySave(UserVo vo) {
+  private UserPO convertVoToEntitySave(UserVO vo) {
     UserPO user = new UserPO();
 
     convertVoToEntity(vo, user);
@@ -128,10 +128,10 @@ public class UserServiceImpl implements UserService {
   /**
    * vo 转为更新后的 entity.
    *
-   * @param vo UserVo
+   * @param vo UserVO
    * @return UserPO
    */
-  private UserPO convertVoToEntityUpdate(UserVo vo) {
+  private UserPO convertVoToEntityUpdate(UserVO vo) {
     UserPO user = new UserPO();
 
     convertVoToEntity(vo, user);
@@ -140,7 +140,7 @@ public class UserServiceImpl implements UserService {
     return user;
   }
 
-  private void convertVoToEntity(UserVo vo, UserPO user) {
+  private void convertVoToEntity(UserVO vo, UserPO user) {
     user.setId(vo.getId());
     user.setName(vo.getName());
     user.setGender(vo.getGender());

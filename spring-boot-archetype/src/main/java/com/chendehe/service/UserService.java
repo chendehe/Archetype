@@ -2,7 +2,7 @@ package com.chendehe.service;
 
 import com.chendehe.vo.Page;
 import com.chendehe.vo.PageResult;
-import com.chendehe.vo.UserVo;
+import com.chendehe.vo.UserVO;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface UserService {
@@ -10,22 +10,22 @@ public interface UserService {
   /**
    * 查找列表.
    */
-  PageResult<UserVo> findAll(Page page);
+  PageResult<UserVO> findAll(Page page);
 
   /**
    * 查找详情.
    */
-  UserVo findOne(String id);
+  UserVO findOne(String id);
 
   /**
    * 新建.
    */
-  UserVo save(UserVo vo);
+  UserVO save(UserVO vo);
 
   /**
    * 更新.
    */
-  UserVo update(UserVo vo);
+  UserVO update(UserVO vo);
 
   /**
    * 删除.

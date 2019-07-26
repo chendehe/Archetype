@@ -15,7 +15,7 @@ import org.springframework.validation.annotation.Validated;
 @Setter
 @ToString
 @Validated
-public class UserVo {
+public class UserVO {
 
   private String id;
 
