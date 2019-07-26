@@ -8,12 +8,10 @@ CREATE TABLE `t_user`
     `create_time` datetime,
     `update_time` datetime,
     PRIMARY KEY (`id`)
-)
-    ENGINE = InnoDB
-    DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_general_ci
-    ROW_FORMAT = DYNAMIC
-;
+) ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci
+  ROW_FORMAT = DYNAMIC;
 
 CREATE TABLE `t_student`
 (
@@ -25,9 +23,7 @@ CREATE TABLE `t_student`
     `create_time` datetime,
     `update_time` datetime,
     PRIMARY KEY (`id`)
-)
-    ENGINE = InnoDB
-    DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_general_ci
-    ROW_FORMAT = DYNAMIC
-;
+) ENGINE = InnoDB
+  DEFAULT CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci
+  ROW_FORMAT = DYNAMIC;
