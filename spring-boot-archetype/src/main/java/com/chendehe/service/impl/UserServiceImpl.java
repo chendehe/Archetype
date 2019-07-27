@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
 
     result.setTotalNum(count);
 
-    List<UserPO> userList = userDao.listUserByPage(page);
+    List<UserPO> userList = userDao.listByPage(page);
 
     result.setList(userList.stream().map(this::convertEntityToVo).collect(Collectors.toList()));
     result.setPageSize(page.getPageSize());
@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public UserVO getUserById(String id) {
-    return convertEntityToVo(userDao.getUserById(id)
+    return convertEntityToVo(userDao.getById(id)
         .orElseThrow(() -> new ValidationException("object.not.exist", id)));
   }
 
@@ -62,6 +62,16 @@ public class UserServiceImpl implements UserService {
 
     UserPO entity = convertVoToEntitySave(vo);
     userDao.save(entity);
+
+    // 批量插入验证
+//    UserPO entity1 = convertVoToEntitySave(vo);
+//    entity1.setId(IdGenerator.get());
+//    UserPO entity2 = convertVoToEntitySave(vo);
+//    entity2.setId(IdGenerator.get());
+//    List<UserPO> list = new ArrayList<>();
+//    list.add(entity1);
+//    list.add(entity2);
+//    userDao.saveBatch(list);
 
     return vo;
   }
@@ -78,6 +88,11 @@ public class UserServiceImpl implements UserService {
   @Override
   public void remove(String id) {
     userDao.remove(id);
+    // 批量删除验证
+//    Set<String> ids = new HashSet<>();
+//    ids.add("25e4b39ec3f9413d80b8d1ba8f298a5e");
+//    ids.add("2acc75b330d74c4a83dd5e4c3a292640");
+//    userDao.removeByIds(ids);
   }
 
   @Override

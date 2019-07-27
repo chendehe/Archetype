@@ -36,9 +36,6 @@ public final class DataCheck {
     }
   }
 
-  public static void main(String[] args) {
-    checkNull("123", "ddd");
-  }
   /**
    * 检查空对象.
    *

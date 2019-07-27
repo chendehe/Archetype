@@ -20,7 +20,6 @@ public final class TimeUtils {
   private TimeUtils() {
   }
 
-  private static final String EMPTY = "";
   private static final String DATE = "yyyy-MM-dd";
   private static final String DATE_TIME = "yyyy-MM-dd HH:mm:ss";
 
@@ -28,7 +27,7 @@ public final class TimeUtils {
    * Temporal 转为 DATE 字符串.
    */
   public static String parseString(Temporal time) {
-    return parseString(time, EMPTY);
+    return parseString(time, StringUtils.EMPTY);
   }
 
   /**
@@ -44,14 +43,14 @@ public final class TimeUtils {
       return ((LocalDateTime) time).format(DateTimeFormatter.ofPattern(dateFormat));
     }
 
-    return EMPTY;
+    return StringUtils.EMPTY;
   }
 
   /**
    * DATE 字符串转为 LocalDate.
    */
   public static LocalDate parseLocalDate(String time) {
-    return parseLocalDate(time, EMPTY);
+    return parseLocalDate(time, StringUtils.EMPTY);
   }
 
   /**
