@@ -11,6 +11,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.Temporal;
 import java.time.temporal.TemporalAdjusters;
 
+import java.util.Calendar;
+import java.util.Date;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -77,6 +79,20 @@ public final class TimeUtils {
     public static LocalDateTime parseLocalDateTime(String time, String format) {
         String dateFormat = StringUtils.isBlank(format) ? DATE_TIME : format;
         return LocalDateTime.parse(time, DateTimeFormatter.ofPattern(dateFormat));
+    }
+
+    /**
+     * Date 转为 LocalDateTime.
+     */
+    public static LocalDateTime parseLocalDateTime(Date date) {
+        return LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+    }
+
+    /**
+     * Calendar 转为 LocalDateTime.
+     */
+    public static LocalDateTime parseLocalDateTime(Calendar calendar) {
+        return LocalDateTime.ofInstant(calendar.toInstant(), ZoneId.systemDefault());
     }
 
     /**
