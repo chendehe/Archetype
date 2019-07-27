@@ -10,6 +10,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.Temporal;
 import java.time.temporal.TemporalAdjusters;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * 时间工具类.
@@ -19,37 +20,60 @@ public final class TimeUtils {
   private TimeUtils() {
   }
 
+  private static final String EMPTY = "";
   private static final String DATE = "yyyy-MM-dd";
   private static final String DATE_TIME = "yyyy-MM-dd HH:mm:ss";
 
   /**
+   * Temporal 转为 DATE 字符串.
+   */
+  public static String parseString(Temporal time) {
+    return parseString(time, EMPTY);
+  }
+
+  /**
    * Temporal 转为字符串.
    */
-  public static String parseString(Temporal time, String... format) {
+  public static String parseString(Temporal time, String format) {
     if (time instanceof LocalDate) {
-      String dateFormat = null == format || 0 == format.length ? DATE : format[0];
+      String dateFormat = StringUtils.isBlank(format) ? DATE : format;
       return ((LocalDate) time).format(DateTimeFormatter.ofPattern(dateFormat));
-    } else if (time instanceof LocalDateTime) {
-      String dateFormat = null == format || 0 == format.length ? DATE_TIME : format[0];
+    }
+    if (time instanceof LocalDateTime) {
+      String dateFormat = StringUtils.isBlank(format) ? DATE_TIME : format;
       return ((LocalDateTime) time).format(DateTimeFormatter.ofPattern(dateFormat));
     }
 
-    return "";
+    return EMPTY;
+  }
+
+  /**
+   * DATE 字符串转为 LocalDate.
+   */
+  public static LocalDate parseLocalDate(String time) {
+    return parseLocalDate(time, EMPTY);
   }
 
   /**
    * 字符串转为 LocalDate.
    */
-  public static LocalDate parseLocalDate(String time, String... format) {
-    String dateFormat = null == format || 0 == format.length ? DATE : format[0];
+  public static LocalDate parseLocalDate(String time, String format) {
+    String dateFormat = StringUtils.isBlank(format) ? DATE : format;
     return LocalDate.parse(time, DateTimeFormatter.ofPattern(dateFormat));
   }
 
   /**
    * 字符串转为 LocalDateTime.
    */
-  public static LocalDateTime parseLocalDateTime(String time, String... format) {
-    String dateFormat = null == format || 0 == format.length ? DATE_TIME : format[0];
+  public static LocalDateTime parseLocalDateTime(String time) {
+    return parseLocalDateTime(time, "");
+  }
+
+  /**
+   * 字符串转为 LocalDateTime.
+   */
+  public static LocalDateTime parseLocalDateTime(String time, String format) {
+    String dateFormat = StringUtils.isBlank(format) ? DATE_TIME : format;
     return LocalDateTime.parse(time, DateTimeFormatter.ofPattern(dateFormat));
   }
 
@@ -73,7 +97,8 @@ public final class TimeUtils {
   public static Temporal startDayOfMonth(Temporal time) {
     if (time instanceof LocalDate) {
       return ((LocalDate) time).with(TemporalAdjusters.firstDayOfMonth());
-    } else if (time instanceof LocalDateTime) {
+    }
+    if (time instanceof LocalDateTime) {
       return ((LocalDateTime) time).with(TemporalAdjusters.firstDayOfMonth());
     }
     return null;
@@ -85,7 +110,8 @@ public final class TimeUtils {
   public static Temporal endDayOfMonth(Temporal time) {
     if (time instanceof LocalDate) {
       return ((LocalDate) time).with(TemporalAdjusters.lastDayOfMonth());
-    } else if (time instanceof LocalDateTime) {
+    }
+    if (time instanceof LocalDateTime) {
       return ((LocalDateTime) time).with(TemporalAdjusters.lastDayOfMonth());
     }
     return null;
@@ -97,7 +123,8 @@ public final class TimeUtils {
   public static Temporal dayOfMonth(Temporal time, int n) {
     if (time instanceof LocalDate) {
       return ((LocalDate) time).withDayOfMonth(n);
-    } else if (time instanceof LocalDateTime) {
+    }
+    if (time instanceof LocalDateTime) {
       return ((LocalDateTime) time).withDayOfMonth(n);
     }
     return null;
@@ -109,7 +136,8 @@ public final class TimeUtils {
   public static Temporal plusDay(Temporal time, int n) {
     if (time instanceof LocalDate) {
       return ((LocalDate) time).plusDays(n);
-    } else if (time instanceof LocalDateTime) {
+    }
+    if (time instanceof LocalDateTime) {
       return ((LocalDateTime) time).plusDays(n);
     }
     return null;
@@ -121,7 +149,8 @@ public final class TimeUtils {
   public static Temporal plusHours(Temporal time, int n) {
     if (time instanceof LocalTime) {
       return ((LocalTime) time).plusHours(n);
-    } else if (time instanceof LocalDateTime) {
+    }
+    if (time instanceof LocalDateTime) {
       return ((LocalDateTime) time).plusHours(n);
     }
     return null;

@@ -18,7 +18,7 @@ public final class DataCheck {
    * @param str  字符串
    * @param code 错误编码
    */
-  private static void checkStrEmpty(String str, String code, String... param) {
+  private static void checkEmpty(String str, String code, String... param) {
     if (StringUtils.isEmpty(str)) {
       throw new ValidationException(code, param);
     }
@@ -30,13 +30,15 @@ public final class DataCheck {
    * @param str  字符串
    * @param code 错误编码
    */
-  public static void checkTrimStrEmpty(String str, String code, String... param) {
-    checkStrEmpty(str, code, param);
-    if (StringUtils.isEmpty(str.trim())) {
+  public static void checkBlank(String str, String code, String... param) {
+    if (StringUtils.isBlank(str)) {
       throw new ValidationException(code, param);
     }
   }
 
+  public static void main(String[] args) {
+    checkNull("123", "ddd");
+  }
   /**
    * 检查空对象.
    *
@@ -68,11 +70,11 @@ public final class DataCheck {
    */
   public static <T> void checkEnum(Class<?> c, T t, String code, String... param) {
     try {
+
       Enum e = (Enum) c.getMethod("forValue", new Class[]{t.getClass()})
           .invoke(c, new Object[]{t});
-      if (null == e) {
-        throw new ValidationException(code, param);
-      }
+      Optional.ofNullable(e).orElseThrow(() -> new ValidationException(code, param));
+
     } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
       throw new ValidationException(code, param);
     }

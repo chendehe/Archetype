@@ -33,12 +33,17 @@ public class UserServiceImpl implements UserService {
   public PageResult<UserVO> listUserByPage(Page page) {
 
     PageResult<UserVO> result = new PageResult<>();
+
+    int count = userDao.count();
+    if (count < 1) {
+      return result.defaultPage();
+    }
+
+    result.setTotalNum(count);
+
     List<UserPO> userList = userDao.listUserByPage(page);
 
-    result.setList(userList.stream().map(
-        this::convertEntityToVo).collect(Collectors.toList())
-    );
-    result.setTotalNum(userDao.count());
+    result.setList(userList.stream().map(this::convertEntityToVo).collect(Collectors.toList()));
     result.setPageSize(page.getPageSize());
     result.setCurrentPage(page.getCurrentPage());
     return result;

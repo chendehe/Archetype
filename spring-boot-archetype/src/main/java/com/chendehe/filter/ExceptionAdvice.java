@@ -42,7 +42,8 @@ public final class ExceptionAdvice {
     } else {
       String defaultMsg = ErrorMessage.message(ErrorCode.SYSTEM_ERROR);
       if (ex instanceof MethodArgumentNotValidException) {
-        String errorMessage = ((MethodArgumentNotValidException) ex).getBindingResult().getAllErrors()
+        MethodArgumentNotValidException methodEx = (MethodArgumentNotValidException) ex;
+        String errorMessage = methodEx.getBindingResult().getAllErrors()
             .stream().map(DefaultMessageSourceResolvable::getDefaultMessage)
             .reduce((s1, s2) -> s1.concat(",").concat(Optional.ofNullable(s2).orElse("")))
             .orElse(defaultMsg);
@@ -50,7 +51,8 @@ public final class ExceptionAdvice {
         return new ResponseEntity<>(
             new ErrorResult(errorMessage, errorMessage), HttpStatus.BAD_REQUEST);
       } else if (ex instanceof BindException) {
-        String errorMessage = ((BindException) ex).getBindingResult().getAllErrors()
+        BindException bindEx = (BindException) ex;
+        String errorMessage = bindEx.getBindingResult().getAllErrors()
             .stream().map(DefaultMessageSourceResolvable::getDefaultMessage)
             .reduce((s1, s2) -> s1.concat(",").concat(Optional.ofNullable(s2).orElse("")))
             .orElse(defaultMsg);
@@ -70,9 +72,8 @@ public final class ExceptionAdvice {
   private HttpStatus getStatus(HttpServletRequest request) {
     Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
     LOGGER.debug("http status is:{}", statusCode);
-    if (statusCode == null) {
-      return HttpStatus.INTERNAL_SERVER_ERROR;
-    }
-    return HttpStatus.valueOf(statusCode);
+
+    return HttpStatus.valueOf(Optional.ofNullable(statusCode)
+        .orElse(HttpStatus.INTERNAL_SERVER_ERROR.value()));
   }
 }

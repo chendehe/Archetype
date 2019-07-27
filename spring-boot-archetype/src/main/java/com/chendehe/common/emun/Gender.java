@@ -1,5 +1,6 @@
 package com.chendehe.common.emun;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,11 +18,13 @@ public enum Gender {
     this.value = value;
   }
 
-  private static Map<Integer, Gender> map = new HashMap<>();
+  private static Map<Integer, Gender> map;
 
   static {
+    Map<Integer, Gender> hashMap = new HashMap<>();
     for (Gender en : Gender.values()) {
-      map.put(en.value, en);
+      hashMap.put(en.value, en);
+      map = Collections.unmodifiableMap(hashMap);
     }
   }
 
