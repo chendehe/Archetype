@@ -22,15 +22,15 @@ import org.springframework.test.web.servlet.MockMvc;
 @AutoConfigureMockMvc
 public class UserServiceTest {
 
-  @Autowired
-  private MockMvc mvc;
-  @Autowired
-  private TestsConfiguration config;
+    @Autowired
+    private MockMvc mvc;
+    @Autowired
+    private TestsConfiguration config;
 
-  @Test
-  public void exampleTest() throws Exception {
-    System.out.println(config);
-    this.mvc.perform(get("/hello")).andExpect(status().isOk()).andExpect(content().string("Hello World"));
-  }
+    @Test
+    public void exampleTest() throws Exception {
+        System.out.println(config);
+        this.mvc.perform(get("/hello")).andExpect(status().isOk()).andExpect(content().string("Hello World"));
+    }
 
 }

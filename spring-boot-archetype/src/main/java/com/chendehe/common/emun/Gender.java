@@ -6,34 +6,43 @@ import java.util.Map;
 
 /**
  * 性别 1-男，2-女.
+ * 
+ * @author CDH
+ * @since 2019/7/27 16:10
  */
 public enum Gender {
 
-  MALE(1),
-  FEMALE(2);
+    /**
+     * 男性
+     */
+    MALE(1),
+    /**
+     * 女性
+     */
+    FEMALE(2);
 
-  private int value;
+    private int value;
 
-  Gender(int value) {
-    this.value = value;
-  }
-
-  private static Map<Integer, Gender> map;
-
-  static {
-    Map<Integer, Gender> hashMap = new HashMap<>();
-    for (Gender en : Gender.values()) {
-      hashMap.put(en.value, en);
-      map = Collections.unmodifiableMap(hashMap);
+    Gender(int value) {
+        this.value = value;
     }
-  }
 
-  public int getValue() {
-    return value;
-  }
+    private static Map<Integer, Gender> map;
 
-  public static Enum forValue(Integer value) {
-    return map.get(value);
-  }
+    static {
+        Map<Integer, Gender> hashMap = new HashMap<>();
+        for (Gender en : Gender.values()) {
+            hashMap.put(en.value, en);
+            map = Collections.unmodifiableMap(hashMap);
+        }
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public static Enum forValue(Integer value) {
+        return map.get(value);
+    }
 
 }

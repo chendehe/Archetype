@@ -1,9 +1,10 @@
 package com.chendehe;
 
+import org.springframework.boot.test.context.TestConfiguration;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.boot.test.context.TestConfiguration;
 
 /**
  * 测试配置类.
@@ -13,6 +14,6 @@ import org.springframework.boot.test.context.TestConfiguration;
 @ToString
 @TestConfiguration
 public class TestsConfiguration {
-  private String username;
-  private Integer age;
+    private String username;
+    private Integer age;
 }

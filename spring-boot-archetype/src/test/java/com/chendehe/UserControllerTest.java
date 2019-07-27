@@ -17,13 +17,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class UserControllerTest {
 
-  @Autowired
-  private TestRestTemplate restTemplate;
+    @Autowired
+    private TestRestTemplate restTemplate;
 
-  @Test
-  public void exampleTest() {
-    String body = this.restTemplate.getForObject("/users/hello", String.class);
-    assertThat(body).isEqualTo("Hello World");
-  }
+    @Test
+    public void exampleTest() {
+        String body = this.restTemplate.getForObject("/users/hello", String.class);
+        assertThat(body).isEqualTo("Hello World");
+    }
 
 }
