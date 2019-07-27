@@ -68,7 +68,7 @@ public final class TimeUtils {
      * 字符串转为 LocalDateTime.
      */
     public static LocalDateTime parseLocalDateTime(String time) {
-        return parseLocalDateTime(time, "");
+        return parseLocalDateTime(time, StringUtils.EMPTY);
     }
 
     /**
