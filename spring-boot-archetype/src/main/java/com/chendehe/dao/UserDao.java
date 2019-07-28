@@ -61,10 +61,10 @@ public interface UserDao extends BaseDao<UserDao> {
      *
      * @param users 用户列表
      */
-    @Insert("<script> " + "insert into t_user(id, name, gender, birthday, address, create_time, update_time) values "
+    @Insert("<script>insert into t_user(id, name, gender, birthday, address, create_time, update_time) values "
         + "<foreach collection='users' index='index' item='user' separator=','> "
         + "(#{user.id}, #{user.name}, #{user.gender}, #{user.birthday}, #{user.address}, #{user.createTime}, #{user.updateTime})"
-        + "</foreach> " + "</script>")
+        + "</foreach></script>")
     void saveBatch(@Param("users") List<UserPO> users);
 
     /**
@@ -92,9 +92,9 @@ public interface UserDao extends BaseDao<UserDao> {
      *
      * @param ids id 集合
      */
-    @Delete("<script>" + "delete from t_user where id in "
-        + "<foreach collection='ids' index='index' item='id' open='(' separator=',' close=')'>" + "#{id}" + "</foreach>"
-        + "</script>")
+    @Delete("<script>delete from t_user where id in "
+        + "<foreach collection='ids' index='index' item='id' open='(' separator=',' close=')'>#{id}"
+        + "</foreach></script>")
     void removeByIds(@Param("ids") Set<String> ids);
 
     /**

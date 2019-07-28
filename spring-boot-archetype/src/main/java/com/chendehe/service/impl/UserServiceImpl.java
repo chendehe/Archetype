@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
             return result.defaultPage();
         }
 
-        result.setTotalNum(count);
+        result.setTotalCount(count);
 
         List<UserPO> userList = userDao.listByPage(page);
 

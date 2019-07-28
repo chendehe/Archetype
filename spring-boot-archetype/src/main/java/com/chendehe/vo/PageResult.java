@@ -21,7 +21,7 @@ public final class PageResult<T> extends Page {
     /**
      * 总数
      */
-    private Integer totalNum;
+    private Integer totalCount;
 
     private List<T> list;
 
@@ -32,7 +32,7 @@ public final class PageResult<T> extends Page {
      */
     public PageResult<T> defaultPage() {
         PageResult<T> result = new PageResult<>();
-        result.setTotalNum(0);
+        result.setTotalCount(0);
         result.setList(Collections.emptyList());
         result.setCurrentPage(1);
         result.setPageSize(0);
