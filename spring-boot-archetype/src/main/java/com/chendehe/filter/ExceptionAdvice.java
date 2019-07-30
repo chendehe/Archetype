@@ -11,9 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.chendehe.common.ErrorCode;
 import com.chendehe.exception.BaseException;
@@ -26,7 +25,7 @@ import com.chendehe.exception.ErrorResult;
  * @author CDH
  * @since 2019/7/27 16:10
  */
-@ControllerAdvice("com.chendehe.controller")
+@RestControllerAdvice("com.chendehe.controller")
 public final class ExceptionAdvice {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionAdvice.class);
@@ -40,7 +39,6 @@ public final class ExceptionAdvice {
      *            异常
      * @return 响应
      */
-    @ResponseBody
     @ExceptionHandler(Exception.class)
     public ResponseEntity handleControllerException(HttpServletRequest request, Throwable ex) {
         LOGGER.error("occur error", ex);
