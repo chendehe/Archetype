@@ -50,12 +50,6 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
-        <!-- ali数据库连接池,18解决MyBatis3.5的SQLFeatureNotSupportedException -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>1.1.18</version>
-        </dependency>
 
         <!-- 使用@ConfigurationProperties读取配置 -->
         <!-- 消除提示‘Spring Boot Configuration Annotation Processor not fount in classpath’ -->
