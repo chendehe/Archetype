@@ -7,7 +7,6 @@ import java.util.Set;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.ibatis.jdbc.SQL;
-import org.apache.logging.log4j.util.Strings;
 
 /**
  * provider.
@@ -50,7 +49,7 @@ public final class UserDaoProvider {
         if (users instanceof List) {
             List userList = (List)map.get("users");
             if (CollectionUtils.isEmpty(userList)) {
-                return Strings.EMPTY;
+                return "";
             }
 
             MessageFormat mf = new MessageFormat("(#'{'users[{0}].id}, #'{'users[{0}].name}, #'{'users[{0}].gender}"
@@ -70,7 +69,7 @@ public final class UserDaoProvider {
 
         }
 
-        return Strings.EMPTY;
+        return "";
     }
 
     public String update() {
@@ -95,17 +94,17 @@ public final class UserDaoProvider {
         if (ids instanceof Set) {
             Set userIds = (Set)ids;
             if (CollectionUtils.isEmpty(userIds)) {
-                return Strings.EMPTY;
+                return "";
             }
 
             return new SQL() {
                 {
                     DELETE_FROM(TABLE_NAME)
-                        .WHERE("id IN " + "('" + Strings.join(userIds, ',').replaceAll(",", "','") + "')");
+                        .WHERE("id IN " + "('" + String.join("','", userIds) + "')");
                 }
             }.toString();
         }
-        return Strings.EMPTY;
+        return "";
     }
 
     public String count() {
