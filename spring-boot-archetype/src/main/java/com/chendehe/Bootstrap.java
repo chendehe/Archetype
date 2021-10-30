@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * Springboot启动类.
- * 
+ * test
  * @author CDH
  * @since 2019/7/27 16:10
  */
