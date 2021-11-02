@@ -5,12 +5,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 修改：
@@ -35,11 +38,22 @@ public final class FeignTestController {
     @Value("${feign.gray.tag}")
     private String feignGrayTag;
 
+    @Autowired
+    private DiscoveryClient discoveryClient;
+
+    @Autowired
+    private HttpServletRequest request;
+
     /**
      * 测试.
      */
     @GetMapping("/test/{type}")
     public String feign(@PathVariable int type) {
+        LOGGER.info("----------------------" + request.getHeader("canary"));
+
+        //TODO: 实现拦截器，判断灰度版本是否存在，动态调整 k8s 的灰度服务名字，尝试从k8s的包拆分该方法
+        discoveryClient.getServices().forEach(System.out::println);
+
         LOGGER.info("test feign");
         LOGGER.info("type:{}, tag:{}", type, feignGrayTag);
         String hello;

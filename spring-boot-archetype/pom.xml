@@ -131,6 +131,12 @@
             <version>6.1.5.Final</version>
             <scope>compile</scope>
         </dependency>
+
+        <!--SpringCloud Kubernetes Discovery-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-kubernetes</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
