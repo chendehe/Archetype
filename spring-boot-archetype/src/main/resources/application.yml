@@ -30,4 +30,6 @@ management:
         include: mappings,info,health,metrics,loggers
       base-path: /manage
 
-
+logging:
+  level:
+    com.chendehe.service.FeignService: debug
