@@ -42,18 +42,20 @@ public final class FeignTestController {
     public String feign(@PathVariable int type) {
         LOGGER.info("test feign");
         LOGGER.info("type:{}, tag:{}", type, feignGrayTag);
+        String hello = "";
         if (type == 1) {
-            String hello = feignService.hello();
+            hello = feignService.hello();
             LOGGER.info("test feign resp:{}", hello);
         } else {
             String url = "http://cdh-service.kube-system:1111/test/hello";
-            ResponseEntity<String> hello = restTemplate.getForEntity(url, String.class);
+            ResponseEntity<String> resp = restTemplate.getForEntity(url, String.class);
+            hello = resp.getBody();
             LOGGER.info("test feign resp:{}", hello);
 
             return "Hello feign AND " + hello;
         }
 
-        return "Hello feign:" + feignGrayTag;
+        return "Hello feign:" + feignGrayTag + "--->" + hello;
     }
 
 }
