@@ -53,7 +53,7 @@ public final class FeignTestController {
             return "Hello feign AND " + hello;
         }
 
-        return "Hello feign";
+        return "Hello feign:" + feignGrayTag;
     }
 
 }
