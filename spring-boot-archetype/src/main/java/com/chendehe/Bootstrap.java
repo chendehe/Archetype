@@ -1,5 +1,6 @@
 package com.chendehe;
 
+import feign.RequestInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -8,10 +9,14 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
+import java.util.Enumeration;
 
 /**
  * Springboot启动类.
@@ -29,10 +34,32 @@ public class Bootstrap {
     }
 
     @Bean
-    public RestTemplate restTemplate(){
+    public RestTemplate restTemplate() {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().set(1, new StringHttpMessageConverter(StandardCharsets.UTF_8));
         return restTemplate;
+    }
+
+    /**
+     * 用于 HEADER 转发
+     * @return 拦截器
+     */
+    @Bean
+    public RequestInterceptor headerInterceptor() {
+        return template -> {
+            ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+            if (null != attributes) {
+                HttpServletRequest request = attributes.getRequest();
+                Enumeration<String> headerNames = request.getHeaderNames();
+                if (headerNames != null) {
+                    while (headerNames.hasMoreElements()) {
+                        String name = headerNames.nextElement();
+                        String values = request.getHeader(name);
+                        template.header(name, values);
+                    }
+                }
+            }
+        };
     }
 
     /**

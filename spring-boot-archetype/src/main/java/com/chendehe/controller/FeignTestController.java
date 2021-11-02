@@ -42,7 +42,7 @@ public final class FeignTestController {
     public String feign(@PathVariable int type) {
         LOGGER.info("test feign");
         LOGGER.info("type:{}, tag:{}", type, feignGrayTag);
-        String hello = "";
+        String hello;
         if (type == 1) {
             hello = feignService.hello();
             LOGGER.info("test feign resp:{}", hello);
@@ -55,7 +55,7 @@ public final class FeignTestController {
             return "Hello feign AND " + hello;
         }
 
-        return "Hello feign:" + feignGrayTag + "--->" + hello;
+        return "Hello feign:" + feignGrayTag + "--->" + hello + "!";
     }
 
 }
