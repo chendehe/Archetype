@@ -5,12 +5,12 @@ metadata:
   name: cdh-feign-service-gray
   namespace: kube-system
   labels:
-    app: cdh-feign-service-gray
+    app: cdh-feign-service
 spec:
   type: NodePort
   ports:
-    - port: 1112
-      targetPort: 1112
+    - port: 1111
+      targetPort: 1111
       protocol: TCP
       name: http
   selector:
@@ -35,4 +35,4 @@ spec:
         - name: cdh-feign-container-gray
           image: 192.168.63.131:5000/cdh-feign:1.1  #本地私有镜像库的镜像名称+版本
           ports:
-            - containerPort: 1112
+            - containerPort: 1111

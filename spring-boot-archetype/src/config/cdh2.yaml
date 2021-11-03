@@ -5,7 +5,7 @@ metadata:
   name: cdh-service-gray
   namespace: kube-system
   labels:
-    app: cdh-service-gray
+    app: cdh-service
 spec:
   type: NodePort
   ports:

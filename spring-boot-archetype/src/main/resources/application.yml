@@ -19,6 +19,13 @@ spring:
         prepStmtCacheSize: 250
         prepStmtCacheSqlLimit: 2048
         useServerPrepStmts: true
+  cloud:
+    kubernetes:
+      client:
+        namespace: kub-system
+      discovery:
+        all-namespaces: false
+        service-labels: {app: 'cdh-service'}
 
 management:
   endpoint:
