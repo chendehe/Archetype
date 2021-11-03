@@ -41,4 +41,7 @@ logging:
   level:
     com.chendehe.service.FeignService: debug
 
+feign.service.name: cdh-service
+feign.service.port: 1111
+
 feign.gray.tag: gray

@@ -52,7 +52,7 @@ public final class FeignTestController {
         LOGGER.info("----------------------" + request.getHeader("canary"));
 
         //TODO: 实现拦截器，判断灰度版本是否存在，动态调整 k8s 的灰度服务名字，尝试从k8s的包拆分该方法
-        discoveryClient.getServices().forEach(System.out::println);
+        //discoveryClient.getServices().forEach(System.out::println);
 
         LOGGER.info("test feign");
         LOGGER.info("type:{}, tag:{}", type, feignGrayTag);
