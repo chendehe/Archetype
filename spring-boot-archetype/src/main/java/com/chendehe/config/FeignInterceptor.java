@@ -36,9 +36,10 @@ public class FeignInterceptor implements RequestInterceptor {
         if ("gray".equals(feignGrayTag)) {
             url = url.replaceFirst(hostname, hostnameGray);
         }
-        FeignTarget feignTarget = new FeignTarget(FeignTarget.class, name, url);
-        requestTemplate.feignTarget(feignTarget);
 
-        feignTarget.apply(requestTemplate);
+        target = new Target.HardCodedTarget<>(Target.HardCodedTarget.class, name, url);
+        requestTemplate.feignTarget(target);
+
+        target.apply(requestTemplate);
     }
 }
