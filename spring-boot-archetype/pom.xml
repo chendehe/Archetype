@@ -135,7 +135,8 @@
         <!--SpringCloud Kubernetes Discovery-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-kubernetes</artifactId>
+            <artifactId>spring-cloud-kubernetes-core</artifactId>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

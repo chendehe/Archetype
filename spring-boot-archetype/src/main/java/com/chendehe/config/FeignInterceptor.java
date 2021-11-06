@@ -3,9 +3,10 @@ package com.chendehe.config;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import feign.Target;
+import io.fabric8.kubernetes.api.model.Service;
+import io.fabric8.kubernetes.client.KubernetesClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.kubernetes.discovery.KubernetesDiscoveryClient;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -18,26 +19,30 @@ public class FeignInterceptor implements RequestInterceptor {
     private String feignGrayTag;
 
     @Autowired
-    private KubernetesDiscoveryClient discoveryClient;
-
-    @Value("${spring.cloud.kubernetes.client.namespace}")
-    private String namespace;
+    private KubernetesClient client;
 
     @Override
     public void apply(RequestTemplate requestTemplate) {
-        System.out.println(feignGrayTag);
+
         Target<?> target = requestTemplate.feignTarget();
-        String name = target.name();
+        String serviceName = target.name();
         String url = target.url();
 
-        String hostname = name + "." + namespace;
-        String hostnameGray = hostname.concat("-gray");
-//        List<Endpoints> endPointsList = discoveryClient.getEndPointsList(hostnameGray);
         if ("gray".equals(feignGrayTag)) {
-            url = url.replaceFirst(hostname, hostnameGray);
+            String namespace = url.replaceFirst("http://".concat(serviceName).concat("."), "");
+            if (namespace.contains(":")) {
+                // 有端口
+                namespace = namespace.substring(0, namespace.indexOf(":"));
+            }
+            String serviceNameGray = serviceName.concat("-gray");
+            Service service = client.services().inNamespace(namespace).withName(serviceNameGray).get();
+            if (null != service) {
+                // 灰度，且存在灰度版本，替换URL=URL+"-gray"
+                url = url.replaceFirst(serviceName, serviceNameGray);
+            }
         }
 
-        target = new Target.HardCodedTarget<>(Target.HardCodedTarget.class, name, url);
+        target = new Target.HardCodedTarget<>(Target.HardCodedTarget.class, serviceName, url);
         requestTemplate.feignTarget(target);
 
         target.apply(requestTemplate);

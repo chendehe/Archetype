@@ -23,9 +23,6 @@ spring:
     kubernetes:
       client:
         namespace: kub-system
-      discovery:
-        all-namespaces: false
-        service-labels: {app: 'cdh-service'}
 
 management:
   endpoint:
