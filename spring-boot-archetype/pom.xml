@@ -132,12 +132,6 @@
             <scope>compile</scope>
         </dependency>
 
-        <!--SpringCloud Kubernetes Discovery-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-kubernetes-core</artifactId>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
 
     <build>

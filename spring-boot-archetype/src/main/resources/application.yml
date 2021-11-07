@@ -19,10 +19,6 @@ spring:
         prepStmtCacheSize: 250
         prepStmtCacheSqlLimit: 2048
         useServerPrepStmts: true
-  cloud:
-    kubernetes:
-      client:
-        namespace: kub-system
 
 management:
   endpoint:
@@ -38,7 +34,9 @@ logging:
   level:
     com.chendehe.service.FeignService: debug
 
-feign.service.name: cdh-service
-feign.service.port: 1111
+feign:
+  services:
+    namespace: kube-system
+    gray: "{'cdh-service': true, 'cdh-service2': false}"
 
 feign.gray.tag: gray
