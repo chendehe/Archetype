@@ -19,6 +19,9 @@ spring:
         prepStmtCacheSize: 250
         prepStmtCacheSqlLimit: 2048
         useServerPrepStmts: true
+  redis:
+    host: 10.211.55.5
+    port: 6379
 
 rocketmq:
   name-server: 10.211.55.5:9876
@@ -27,7 +30,6 @@ rocketmq:
   consumer:
     group: my-consumer-group
     topic: topic-1
-
 management:
   endpoint:
     health:
