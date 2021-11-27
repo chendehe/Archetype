@@ -20,6 +20,14 @@ spring:
         prepStmtCacheSqlLimit: 2048
         useServerPrepStmts: true
 
+rocketmq:
+  name-server: 10.211.55.5:9876
+  producer:
+    group: my-group
+  consumer:
+    group: my-consumer-group
+    topic: topic-1
+
 management:
   endpoint:
     health:
