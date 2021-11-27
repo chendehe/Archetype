@@ -1,4 +1,4 @@
-CREATE TABLE `t_user`
+CREATE TABLE test.`t_user`
 (
     `id`          char(36),
     `name`        varchar(10),
@@ -13,7 +13,7 @@ CREATE TABLE `t_user`
   COLLATE = utf8mb4_general_ci
   ROW_FORMAT = DYNAMIC;
 
-CREATE TABLE `t_student`
+CREATE TABLE test.`t_student`
 (
     `id`          char(36),
     `school`      varchar(30),
