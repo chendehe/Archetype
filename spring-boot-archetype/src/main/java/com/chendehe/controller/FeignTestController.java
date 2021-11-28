@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 @RequestMapping("/feign")
-public final class FeignTestController {
+public class FeignTestController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FeignTestController.class);
 
