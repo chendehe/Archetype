@@ -53,6 +53,10 @@ public class Bootstrap {
                     while (headerNames.hasMoreElements()) {
                         String name = headerNames.nextElement();
                         String values = request.getHeader(name);
+                        // 跳过 content-length,防止报错Feign报错feign.RetryableException: too many bytes written executing
+                        if ("content-length".equals(name)) {
+                            continue;
+                        }
                         template.header(name, values);
                     }
                 }
